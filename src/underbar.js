@@ -6,9 +6,7 @@
   // Returns whatever value is passed as the argument. This function doesn't
   // seem very useful, but remember it--if a function needs to provide an
   // iterator when the user does not pass one in, this will be handy.
-  _.identity = function(val) {
-    return val;
-  };
+  _.identity = (val) => val;
 
   /**
    * COLLECTIONS
@@ -31,15 +29,12 @@
 
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
-  _.first = function(array, n) {
-    return n === undefined ? array[0] : array.slice(0, n);
-  };
+  _.first = (array, n) =>  n === undefined ? array[0] : array.slice(0, n);
 
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
-  _.last = function(array, n) {
-    return n === undefined ? array[array.length-1] : array.slice(Math.max(array.length-n, 0));
-  };
+  _.last = (array, n) => n === undefined ? array[array.length-1] : array.slice(Math.max(array.length-n, 0));
+  
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
@@ -70,7 +65,7 @@
     // it uses the iteration helper `each`, which you will need to write.
     var result = -1;
 
-    _.each(array, function(item, index) {
+    _.each(array, (item, index) => {
       if (item === target && result === -1) {
         result = index;
       }
@@ -270,14 +265,11 @@
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {
+  _.extend = function(obj, ...theArgs) {
     //convert arguments to arg array
     //for each arg in array loop through key values and set them on the obj 
-    var addOnObjs = Array.prototype.slice.call(arguments, 1);
-    _.each(addOnObjs, function(addObj){
-      _.each(addObj, function(value, key){
-        obj[key]= value;
-      })
+    _.each(theArgs, (addObj) => {
+      _.each(addObj, (value, key) => obj[key]= value)
       
     })
     
